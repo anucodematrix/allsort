@@ -1,2 +1,0 @@
-# allsort
-all sorting algos
