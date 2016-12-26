@@ -1,0 +1,149 @@
+
+#include<stdio.h>
+#include<conio.h>
+void lsearch(int[],int,int);
+void binarys(int[],int,int);
+void bubble(int[],int);
+void swap(int[],int,int);
+void main()
+{
+  clrscr();
+  int i,j,total,arr[100],num;
+  printf("enter number of elements \n");
+  scanf("%d",&total);
+  printf("enter elements in array \n");
+  for(i=0;i<total;i++)
+  {
+   scanf("%d",&arr[i]);
+   }
+   printf(" the entered array is \n");
+   for(i=0;i<total;i++)
+   {
+    printf("%d \t",arr[i]);
+    }
+    printf("enter the number you want to search \n");
+    scanf("%d",&num);
+    binarys(arr,total,num);
+    getch();
+}
+    void lsearch(int arr2[],int total2,int num2)
+ {
+    int i;
+    int count=0;
+     printf("SEARCHING ELEMENTS \n");
+     for(i=0;i<total2;i++)
+　
+     {
+      if(arr2[i]==num2)
+      {
+	printf(" \n the required number is present at %d \n",i+1);
+	count++;
+	 }
+     }
+     if(count==0)
+     {
+      printf("'the required number is not present in array");
+      }
+}
+　
+void binarys(int arr2[],int total2,int num2)
+{
+int count=0;
+int low=0,high=total2-1;
+int mid;
+　
+printf("searching element through binary search \n");
+// sorting elements
+bubble(arr2,total2);
+　
+while(low <= high)
+{
+ mid=(high+low)/2;
+ if(num2==arr2[mid])
+  {
+   printf("the required number is present %d position \n",mid+1);
+   count++;
+    break;
+   }
+　
+　
+　
+    else if (num2 < arr2[mid])
+      high=mid-1;
+       else
+	 low=mid+1;
+}
+int mid1=mid;
+while(mid1>=low)
+  {
+　
+   if(arr2[mid1]==arr2[mid1-1])
+    {
+    printf("the required number is present at %d position \n",mid1);
+    mid1--;
+    }
+    else
+    break;
+   }
+while(mid1<=high)
+{
+ if(arr2[mid]==arr2[mid+1])
+  {
+   printf("the required number is present at %d position \n",mid+2);
+   mid++;
+   }
+   else
+   break;
+  }
+　
+  if(count==0)
+　
+printf(" number not found in the array \n");
+　
+}
+　
+　
+void bubble(int arr2[],int total2)
+{
+  int i,flag,k;
+　
+//optimum solution
+　
+for(i=0;i<total2-1;i++)
+　
+{ flag=0;
+  for(k=0;k<total2-i-1;k++)
+　
+   {
+　
+     if(arr2[k]>arr2[k+1])
+     {swap(arr2,k,k+1);
+　
+      flag=1;
+     }
+    }
+　
+  if(flag == 0)
+  break;
+　
+}
+printf("the sorted array is \n");
+　
+for(i=0; i<total2;i++)
+printf("%d \t",arr2[i]);
+　
+}
+　
+void swap(int arr2[],int a,int b)
+{
+int temp;
+temp=arr2[a];
+arr2[a]=arr2[b];
+arr2[b]=temp;
+}
+　
+　
+　
+　
+　
+　
