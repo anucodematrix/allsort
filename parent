@@ -1,9 +1,15 @@
 #include<stdio.h>
 #include<conio.h>
-void lsearch(int[],int,int);
-void binarys(int[],int,int);
+void lsearch(int[],int,int);  
+void binarys(int[],int,int);  
 void bubble(int[],int);
 void swap(int[],int,int);
+void display(int[],int);
+void selection(int[],int);
+void insertion(int[],int);
+//merge sort
+void merge(int[],int,int,int,int);
+void part(int[],int,int,int);
 void main()
 {
   clrscr();
@@ -31,7 +37,7 @@ void main()
     int count=0;
      printf("SEARCHING ELEMENTS \n");
      for(i=0;i<total2;i++)
-　
+
      {
       if(arr2[i]==num2)
       {
@@ -44,29 +50,29 @@ void main()
       printf("'the required number is not present in array");
       }
 }
-　
+
 void binarys(int arr2[],int total2,int num2)
 {
 int count=0;
 int low=0,high=total2-1;
 int mid;
-　
-printf("searching element through binary search \n");
+
+printf("\n searching element through binary search \n");
 // sorting elements
-bubble(arr2,total2);
-　
+part(arr2,0,total2-1,total2);
+display(arr2,total2);
 while(low <= high)
 {
  mid=(high+low)/2;
  if(num2==arr2[mid])
   {
-   printf("the required number is present %d position \n",mid+1);
+   printf("\n the required number is present %d position \n",mid+1);
    count++;
     break;
    }
-　
-　
-　
+
+
+
     else if (num2 < arr2[mid])
       high=mid-1;
        else
@@ -75,7 +81,7 @@ while(low <= high)
 int mid1=mid;
 while(mid1>=low)
   {
-　
+
    if(arr2[mid1]==arr2[mid1-1])
     {
     printf("the required number is present at %d position \n",mid1);
@@ -94,45 +100,142 @@ while(mid1<=high)
    else
    break;
   }
-　
+
   if(count==0)
-　
+
 printf(" number not found in the array \n");
-　
+
 }
-　
-　
+
+
 void bubble(int arr2[],int total2)
 {
   int i,flag,k;
-　
+
 //optimum solution
-　
+
 for(i=0;i<total2-1;i++)
-　
+
 { flag=0;
   for(k=0;k<total2-i-1;k++)
-　
+
    {
-　
+
      if(arr2[k]>arr2[k+1])
      {swap(arr2,k,k+1);
-　
+
       flag=1;
      }
     }
-　
+
   if(flag == 0)
   break;
-　
+
 }
 printf("the sorted array is \n");
-　
+
 for(i=0; i<total2;i++)
 printf("%d \t",arr2[i]);
-　
+
 }
-　
+
+void selection(int arr[],int total)
+{
+  //this sorting algorithms will search the array for the minimum      
+  //number and replace it will the number present in the array element 0
+
+int i,min,j;
+
+ for(i=0;i<total-1;i++)
+
+  { min=i;
+   for(j=i+1;j<total;j++)
+   {
+    if(arr[j]<arr[min])
+    {
+     swap(arr,j,i);
+     min=j;
+    }
+   }
+  }
+  printf("the sorted array is \n");
+  for(i=0;i<total;i++)
+  printf("%d  ",arr[i]);
+}
+
+void insertion(int arr[],int total)
+
+ //this will create a hole everytime you identify a number and
+//then you have to shift numbers by 1 which are greater than the identified number by 1 place,starting from 1st index
+
+{
+ int hole,i,value;
+
+for(i=1;i<total-1;i++)
+{
+ value=arr[i];
+ hole=i;
+ while(hole > 0 && arr[hole-1] >value)
+ {
+  arr[hole]=arr[hole-1];
+  hole--;
+}
+ arr[hole]=value;
+}
+printf("the sorted array is \n");
+for(i=0;i<total;i++)
+printf("%d  ",arr[i]);
+
+}
+//this is merge sort,the worst best and average all condition //take only O(nlogn) time,so better than selection insertion and
+// bubble sorting algorithms
+
+// below function will divide array into sub list,initially it //will take the array,the high and the low
+
+void part(int arr[],int low,int high,int total)
+
+{
+ int mid;
+ if(low < high)
+ {
+ mid=((low+high)/2);
+ part(arr,low,mid,total);
+ part(arr,mid+1,high,total);
+ merge(arr,low,mid,high,total);
+ }
+}
+ void merge(int arr[],int low,int mid,int high,int total)
+{ 
+int a=low; //for the array which will become sorted array
+int b=low; // for the temp sub array(left)
+int c=mid+1; // for the temp sub array (right)
+int arr2[50]; // for the sorted array
+
+while(b<=mid && c<=high)
+{ 
+
+ if(arr[b] <= arr[c])
+
+  arr2[a++]=arr[b++];
+
+  else
+
+   arr2[a++]=arr[c++];
+}
+
+while(b<=mid)
+{
+ arr2[a++]=arr[b++];
+}
+while( c <= high)
+{
+ arr2[a++]=arr[c++];
+} 
+for(int i=low;i<=high;i++)
+arr[i]=arr2[i];
+
+}
+ 
 void swap(int arr2[],int a,int b)
 {
 int temp;
@@ -140,9 +243,13 @@ temp=arr2[a];
 arr2[a]=arr2[b];
 arr2[b]=temp;
 }
-　
-　
-　
-　
-　
-　
+
+void display(int arr[],int total)
+{
+ int i;
+printf("the sorted array is \n");
+for(i=0;i<total;i++)
+{
+ printf("%d  ",arr[i]);
+}
+}
