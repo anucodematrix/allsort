@@ -1,15 +1,24 @@
+//all sorting algorithm,linear search and binary search for multiple numbers in an array//
 #include<stdio.h>
 #include<conio.h>
-void lsearch(int[],int,int);  
-void binarys(int[],int,int);  
+
+void lsearch(int[],int,int);
+void binarys(int[],int,int);
 void bubble(int[],int);
 void swap(int[],int,int);
 void display(int[],int);
 void selection(int[],int);
 void insertion(int[],int);
 //merge sort
-void merge(int[],int,int,int,int);
+void merge(int[],int,int,int);
 void part(int[],int,int,int);
+//quick sort(in place algorithm) worst-O(n2) best,average -onlogn
+void quick(int[],int,int);
+int quickpart(int[],int,int); //anotherway of part function of qs
+//heapsort
+void heapsort(int[],int);
+void heapify(int[],int,int);
+void buildmaxheap(int[],int);
 void main()
 {
   clrscr();
@@ -59,7 +68,7 @@ int mid;
 
 printf("\n searching element through binary search \n");
 // sorting elements
-part(arr2,0,total2-1,total2);
+heapsort(arr2,total2);
 display(arr2,total2);
 while(low <= high)
 {
@@ -141,8 +150,7 @@ printf("%d \t",arr2[i]);
 
 void selection(int arr[],int total)
 {
-  //this sorting algorithms will search the array for the minimum      
-  //number and replace it will the number present in the array element 0
+  //this sorting algorithms will search the array for the minimum         //number and replace it will the number present in the array    //element 0
 
 int i,min,j;
 
@@ -201,18 +209,18 @@ void part(int arr[],int low,int high,int total)
  mid=((low+high)/2);
  part(arr,low,mid,total);
  part(arr,mid+1,high,total);
- merge(arr,low,mid,high,total);
+ merge(arr,low,mid,high);
  }
 }
- void merge(int arr[],int low,int mid,int high,int total)
-{ 
+ void merge(int arr[],int low,int mid,int high)
+{
 int a=low; //for the array which will become sorted array
 int b=low; // for the temp sub array(left)
 int c=mid+1; // for the temp sub array (right)
 int arr2[50]; // for the sorted array
 
 while(b<=mid && c<=high)
-{ 
+{
 
  if(arr[b] <= arr[c])
 
@@ -230,12 +238,82 @@ while(b<=mid)
 while( c <= high)
 {
  arr2[a++]=arr[c++];
-} 
+}
 for(int i=low;i<=high;i++)
 arr[i]=arr2[i];
 
 }
+
+void quick(int arr[],int low,int high)
+ {
+  if(low<high)
+   {
+    int pivot;
+
+    pivot=quickpart(arr,low,high);
+    quick(arr,low,pivot-1);
+    quick(arr,pivot+1,high);
+   }
+}
+int quickpart(int arr[],int low,int high)
+{ int pindex,pivot,i;
+  pindex=low;
+  pivot=arr[high];
+ for(i=low;i<high;i++)
+{
+ if(arr[i] <= pivot)
+{
+ swap(arr,i,pindex);
+pindex++;
+}
+}
+swap(arr,pindex,high);
+return pindex;
+ }
  
+void heapsort(int arr[],int n)  //we entered here
+{
+ int i;
+ buildmaxheap(arr,n-1); // we called this to get a max heap for  //the first time so that we are eligible for the first loop run
+ for(i=n-1;i>=1;i--)
+ {
+   swap(arr,0,i);        //we are forever stuck here
+   n--;                // until the loop is closed
+   heapify(arr,i,0);   // we jump from here to other function
+ }
+}
+void buildmaxheap(int arr[],int n)
+{
+ int i;                  //this function runs once only
+for(i=((n/2)-1);i>=0;i--)
+{
+ heapify(arr,n,i);
+}
+ }
+
+void heapify(int arr[],int n,int node)
+
+{
+int l=(2*node)+1;
+int r=(2*node)+2;
+
+ int max=node;
+if(l < n && arr[l] > arr[max])
+{
+ max =l;
+}
+if(r < n && arr[r] > arr[max])
+  {
+   max = r;
+  }
+ if(max != node)
+ {
+   swap(arr,node,max);
+   heapify(arr,n,max);
+ }
+
+}
+
 void swap(int arr2[],int a,int b)
 {
 int temp;
@@ -253,3 +331,5 @@ for(i=0;i<total;i++)
  printf("%d  ",arr[i]);
 }
 }
+
+
