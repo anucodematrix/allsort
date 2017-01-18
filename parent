@@ -1,7 +1,7 @@
-//all sorting algorithm,linear search and binary search for multiple numbers in an array//
+// Many Sorting algorithms fused in one program 
+
 #include<stdio.h>
 #include<conio.h>
-
 void lsearch(int[],int,int);
 void binarys(int[],int,int);
 void bubble(int[],int);
@@ -22,7 +22,7 @@ void buildmaxheap(int[],int);
 void main()
 {
   clrscr();
-  int i,j,total,arr[100],num;
+  int i,j,total,arr[100],num,input;
   printf("enter number of elements \n");
   scanf("%d",&total);
   printf("enter elements in array \n");
@@ -37,7 +37,26 @@ void main()
     }
     printf("enter the number you want to search \n");
     scanf("%d",&num);
-    binarys(arr,total,num);
+   printf("Below are the search algorith available,which search algorithm you want to use? \n");
+
+   printf(" 1 .  Binary Search(Best Sorting algorithm) \n");
+   printf(" 2 .  Linear Search(Naive Sorting algorithm)\n");
+   scanf("%d",&input);
+ switch(input)
+ {
+  case 1:
+printf(" \n Searching element using binary search \n");
+binarys(arr,total,num);
+break;
+
+ case 2:
+printf(" \n Searching element using linear search \n");
+lsearch(arr,total,num);
+break;
+
+default:
+printf(" wrong choice entered \n");
+  }
     getch();
 }
     void lsearch(int arr2[],int total2,int num2)
@@ -65,10 +84,59 @@ void binarys(int arr2[],int total2,int num2)
 int count=0;
 int low=0,high=total2-1;
 int mid;
+int input;
 
 printf("\n searching element through binary search \n");
 // sorting elements
+
+printf(" select the sorting algorithm you want to use \n");
+printf(" 1: BUbble Sort \n");
+printf(" 2: Selection Sort \n");
+printf(" 3: Insertion Sort \n");
+printf(" 4: Merge Sort \n");
+printf(" 5: Quick Sort \n");
+printf(" 6: Heap Sort \n");
+scanf("%d",&input);
+switch(input)
+ {
+  case 1:
+printf(" \n Sorting element using Bubble Sort \n");
+bubble(arr2,total2);
+break;
+
+
+ case 2:
+printf(" \n Sorting element using Selection Sort \n");
+selection(arr2,total2);
+break;
+
+
+case 3:
+printf(" \n Sorting element using Insertion Sort \n");
+insertion(arr2,total2);
+break;
+
+case 4:
+printf(" \n Sorting element using Merge Sort \n");
+part(arr2,0,total2-1,total2);
+break;
+
+case 5:
+printf(" \n Sorting element using Quick Sort \n");
+quick(arr2,0,total2-1);
+break;
+
+case 6:
+
+printf(" \n Sorting element using Heap Sort \n");
 heapsort(arr2,total2);
+break;
+
+default:
+	    printf("Error! wrong choice entered");
+
+  }
+
 display(arr2,total2);
 while(low <= high)
 {
@@ -150,7 +218,8 @@ printf("%d \t",arr2[i]);
 
 void selection(int arr[],int total)
 {
-  //this sorting algorithms will search the array for the minimum         //number and replace it will the number present in the array    //element 0
+  //this sorting algorithms will search the array for the minimum       
+  //number and replace it will the number present in the array element 0
 
 int i,min,j;
 
@@ -195,10 +264,12 @@ for(i=0;i<total;i++)
 printf("%d  ",arr[i]);
 
 }
-//this is merge sort,the worst best and average all condition //take only O(nlogn) time,so better than selection insertion and
+//this is merge sort,the worst best and average all condition 
+//take only O(nlogn) time,so better than selection insertion and
 // bubble sorting algorithms
 
-// below function will divide array into sub list,initially it //will take the array,the high and the low
+// below function will divide array into sub list,initially it
+//will take the array,the high and the low
 
 void part(int arr[],int low,int high,int total)
 
@@ -270,11 +341,12 @@ pindex++;
 swap(arr,pindex,high);
 return pindex;
  }
- 
+
 void heapsort(int arr[],int n)  //we entered here
 {
  int i;
- buildmaxheap(arr,n-1); // we called this to get a max heap for  //the first time so that we are eligible for the first loop run
+ buildmaxheap(arr,n-1); // we called this to get a max heap for  
+                        //the first time so that we are eligible for the first loop run
  for(i=n-1;i>=1;i--)
  {
    swap(arr,0,i);        //we are forever stuck here
