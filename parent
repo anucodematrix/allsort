@@ -218,8 +218,7 @@ printf("%d \t",arr2[i]);
 
 void selection(int arr[],int total)
 {
-  //this sorting algorithms will search the array for the minimum       
-  //number and replace it will the number present in the array element 0
+  //this sorting algorithms will search the array for the minimum         //number and replace it will the number present in the array    //element 0
 
 int i,min,j;
 
@@ -264,12 +263,10 @@ for(i=0;i<total;i++)
 printf("%d  ",arr[i]);
 
 }
-//this is merge sort,the worst best and average all condition 
-//take only O(nlogn) time,so better than selection insertion and
+//this is merge sort,the worst best and average all condition //take only O(nlogn) time,so better than selection insertion and
 // bubble sorting algorithms
 
-// below function will divide array into sub list,initially it
-//will take the array,the high and the low
+// below function will divide array into sub list,initially it //will take the array,the high and the low
 
 void part(int arr[],int low,int high,int total)
 
@@ -345,19 +342,18 @@ return pindex;
 void heapsort(int arr[],int n)  //we entered here
 {
  int i;
- buildmaxheap(arr,n-1); // we called this to get a max heap for  
-                        //the first time so that we are eligible for the first loop run
- for(i=n-1;i>=1;i--)
+ buildmaxheap(arr,n); // we called this to get a max heap for  //the first time so that we are eligible for the first loop run
+ for(i=n-1;i>=0;i--)
  {
    swap(arr,0,i);        //we are forever stuck here
-   n--;                // until the loop is closed
+                  // until the loop is closed
    heapify(arr,i,0);   // we jump from here to other function
  }
 }
 void buildmaxheap(int arr[],int n)
 {
- int i;                  //this function runs once only
-for(i=((n/2)-1);i>=0;i--)
+		  //this function runs once only
+for(int i=((n/2)-1);i>=0;i--)
 {
  heapify(arr,n,i);
 }
@@ -403,5 +399,3 @@ for(i=0;i<total;i++)
  printf("%d  ",arr[i]);
 }
 }
-
-
