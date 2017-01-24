@@ -1,0 +1,40 @@
+#this program concentrates on stocks profit maximizing and their variation in C programming language
+
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+ clrscr();
+ int days,choice;
+ printf("\n enter the number of days \n");
+ scanf("%d",&days);
+ printf("EnTer the values of the stock prices \n");
+ for(i=0;i<days;i++)
+ scanf("%d",&arr[days]);
+ printf("enter you choices \n")
+ printf("1. Which day i have to buy and sell for maximizing profit(single buy and sell) \n");
+ printf("2. The number of days i can buy and sell for maximizing profit(maximum days) \n");
+ printf("3. K number of buy and sell for maximizing profit \n");
+ scanf(%d",&choice);
+ switch(choice)
+ {
+  case 1:
+ 
+ 
+  
+  break;
+ case 2:
+  
+  
+  break;
+ case 3:
+  
+  
+  break;
+ default:
+  printf("\n Wrong choice entered \n");
+   
+ } 
+  getch();
+} 
+   
