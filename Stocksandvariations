@@ -2,39 +2,75 @@
 
 #include<stdio.h>
 #include<conio.h>
-void main()
+
+void single(int[],int);
+void maxtimes(int[],int);
+void ktimes(int[],int);
+ void main()
 {
- clrscr();
- int days,choice;
- printf("\n enter the number of days \n");
- scanf("%d",&days);
+  clrscr();
+  int days,choice,i,arr[100];
+  printf("\n enter the number of days \n");
+  scanf("%d",&days);
+  if(days < 2)
+  printf("\n Please enter valid number of days \n");
+ else
+ {
  printf("EnTer the values of the stock prices \n");
  for(i=0;i<days;i++)
- scanf("%d",&arr[days]);
- printf("enter you choices \n")
+ scanf("%d",&arr[i]);
+ printf("the entered stocks are: \n");
+ for(i=0;i<days;i++)
+ printf("%d\t",arr[i]);
+ printf("enter you choices \n");
  printf("1. Which day i have to buy and sell for maximizing profit(single buy and sell) \n");
  printf("2. The number of days i can buy and sell for maximizing profit(maximum days) \n");
  printf("3. K number of buy and sell for maximizing profit \n");
- scanf(%d",&choice);
+ scanf("%d",&choice);
  switch(choice)
  {
   case 1:
- 
- 
-  
-  break;
+ single(arr,days);
+ break;
+
  case 2:
-  
-  
+
+
   break;
  case 3:
-  
-  
+
+
   break;
  default:
   printf("\n Wrong choice entered \n");
-   
- } 
+
+ }
+}
   getch();
-} 
-   
+}
+
+void single(int arr[],int n)
+{
+
+ int i,maxdiff,min,buyday,sellday;
+ for(i=0;i<n;i++)
+ printf("%d \t",arr[i]);
+ maxdiff=arr[1]-arr[0];
+ min=arr[0];
+ buyday=0;
+ sellday=1;
+ for(i=1;i<n;i++)
+ {
+  if((arr[i]-min) > maxdiff)
+   {
+    maxdiff=arr[i]-min;
+    sellday=i;
+   }
+  if(arr[i] < min)
+  {
+   min=arr[i];
+   buyday=i;
+  }
+ }
+ printf(" buy on day %d\t ,sell on day %d\t, maximum difference %d\n",buyday+1,sellday+1,maxdiff);
+ }
