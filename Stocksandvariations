@@ -1,7 +1,13 @@
-#this program concentrates on stocks profit maximizing and their variation in C programming language
+//this program concentrates on stocks profit maximizing and their variation in C programming language
 
 #include<stdio.h>
 #include<conio.h>
+
+  struct solution
+   {
+    int buy;
+    int sell;
+    };
 
 void single(int[],int);
 void maxtimes(int[],int);
@@ -34,13 +40,13 @@ void ktimes(int[],int);
  break;
 
  case 2:
-
-
-  break;
+ maxtimes(arr,days);
+ break;
+ 
  case 3:
 
+break;
 
-  break;
  default:
   printf("\n Wrong choice entered \n");
 
@@ -74,3 +80,30 @@ void single(int arr[],int n)
  }
  printf(" buy on day %d\t ,sell on day %d\t, maximum difference %d\n",buyday+1,sellday+1,maxdiff);
  }
+void maxtimes(int arr[],int n)
+{
+  int i=0,count=0;
+  solution sol[50];
+
+    while(i< n-1)
+    {
+      while((i<n-1) && (arr[i]  >= arr[i+1]))
+      i++;
+      if(i == n-1)
+      break;
+      sol[count].buy=i++;
+      while((i<n) && (arr[i] >= arr[i-1]))
+      i++;
+      sol[count].sell=i-1;
+     count++;
+    }
+    if(count == 0)
+    {
+     printf("\n no profit on buying on selling on any day \n");
+    }
+    else
+    {
+    for(i=0;i<count;i++)
+    printf("Buy on day %d\t Sell on day %d\t Maximum difference is %d\n ",sol[i].buy+1,sol[i].sell+1,arr[sol[i].sell]-arr[sol[i].buy]);
+    }
+  }
